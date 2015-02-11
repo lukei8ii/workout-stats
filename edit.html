@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Workout Stats</title>
+	<title>Workout Stats - Edit</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
@@ -19,7 +19,7 @@
 </head>
 <body>
 	<div class="container">
-		<h3>Workout Stats</h3>
+		<h3>Workout Stats - Edit</h3>
 
 		<div ng-app="myApp">
 			<div ng-controller="WorkoutCtrl as workoutCtrl">
@@ -28,23 +28,16 @@
 						<tr ng-repeat="exercise in workoutCtrl.workout.exercises">
 							<!-- <th scope="row">{{exercise.name}}</th> -->
 							<td>
-								<h5>{{exercise.name}}</h5>
 								<div class="input-group">
+									<input type="text" ng-change="workoutCtrl.change()" class="form-control" ng-model="exercise.name">
 									<span class="input-group-btn">
-										<button class="btn btn-warning" type="button" ng-click="workoutCtrl.subtractTenPercent(exercise)">- 10%</button>
-									</span>
-									<input type="number" ng-change="workoutCtrl.change()" class="form-control" ng-model="exercise.amount">
-									<span class="input-group-btn">
-										<button class="btn btn-primary" type="button" ng-click="workoutCtrl.addFive(exercise)">+ 5 lbs</button>
+										<button class="btn btn-danger" type="button" ng-click="workoutCtrl.remove(exercise)">Remove</button>
 									</span>
 								</div>
-							</td>
-							<td class="plates">
-								<div>{{workoutCtrl.calculatePlates(exercise.amount)}}</div>
-							</td>
 						</tr>
 					</tbody>
 				</table>
+				<button class="btn btn-primary addNew" type="button" ng-click="workoutCtrl.addNew()">Add exercise</button>
 			</div>
 		</div>
 	</div>

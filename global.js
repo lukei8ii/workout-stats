@@ -81,8 +81,20 @@ function WorkoutCtrl(Workout) {
 		// console.log("changed!");
 
 		if (typeof window.localStorage != "undefined") {
-			localStorage.setItem("workout-stats", JSON.stringify(Workout.exercises));
+			localStorage.setItem("workout-stats", JSON.stringify(workoutCtrl.workout.exercises));
 		}
+	};
+
+	workoutCtrl.remove = function(exercise) {
+		workoutCtrl.workout.exercises = workoutCtrl.workout.exercises.filter(function(obj) {
+			return obj.name !== exercise.name;
+		});
+		workoutCtrl.change();
+	};
+
+	workoutCtrl.addNew = function() {
+		workoutCtrl.workout.exercises.push({name: "", amount: 0});
+		workoutCtrl.change();
 	};
 };
 
