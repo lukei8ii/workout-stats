@@ -22,158 +22,192 @@
 	<div class="container">
 		<h3>Workout Stats</h3>
 
-		<div class="row">
-			<div class="col-lg-4 col-lg-offset-1">
-				<form class="bs-component">
-					<div class="form-group">
-						<label class="control-label">Press</label>
-						<div class="row">
-							<div class="col-xs-7">
+		<div ng-app="myApp">
+			<div ng-controller="WorkoutCtrl as workoutCtrl">
+				<table class="table exercises">
+					<tbody>
+						<tr ng-repeat="exercise in workoutCtrl.workout.exercises">
+							<!-- <th scope="row">{{exercise.name}}</th> -->
+							<td>
+								<h5>{{exercise.name}}</h5>
 								<div class="input-group">
-									<input type="number" class="form-control">
 									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
+										<button class="btn btn-warning" type="button" ng-click="workoutCtrl.subtractTenPercent(exercise)">- 10%</button>
+									</span>
+									<input type="number" ng-change="workoutCtrl.change()" class="form-control" ng-model="exercise.amount">
+									<span class="input-group-btn">
+										<button class="btn btn-primary" type="button" ng-click="workoutCtrl.addFive(exercise)">+ 5 lbs</button>
 									</span>
 								</div>
-							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
-							</div>
-						</div>
-					</div>
+							</td>
+							<td class="plates">
+								<div>{{workoutCtrl.calculatePlates(exercise.amount)}}</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 
-					<div class="form-group">
-						<label class="control-label">Upright Row</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="control-label">Curl</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="control-label">Bench Press</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
-							</div>
-						</div>
-					</div>
+				<!-- <div class="row">
+					<div class="col-lg-4 col-lg-offset-1">
+						<form class="bs-component">
 
-					<div class="form-group">
-						<label class="control-label">Flyes</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="control-label">Incline Bench Press</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
-								</div>
-							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="control-label">Deadlift</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
+							<div class="form-group">
+								<label class="control-label">Press</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+											</span>
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
 								</div>
 							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 (2) + 10 + 5 + 2.5</p>
-							</div>
-						</div>
-					</div>
 
-					<div class="form-group">
-						<label class="control-label">Squat</label>
-						<div class="row">
-							<div class="col-xs-7">
-								<div class="input-group">
-									<input type="number" class="form-control">
-									<span class="input-group-btn">
-										<button class="btn btn-default" type="button">- 10%</button>
-										<button class="btn btn-primary" type="button">+ 5</button>
-									</span>
+							<div class="form-group">
+								<label class="control-label">Upright Row</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
 								</div>
 							</div>
-							<div class="col-xs-5 col-weights ">
-								<p class="bg-success weights">45 + 35 + 10</p>
+
+							<div class="form-group">
+								<label class="control-label">Curl</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
+								</div>
 							</div>
-						</div>
+
+							<div class="form-group">
+								<label class="control-label">Bench Press</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">Flyes</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">Incline Bench Press</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">Deadlift</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 (2) + 10 + 5 + 2.5</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="control-label">Squat</label>
+								<div class="row">
+									<div class="col-xs-7">
+										<div class="input-group">
+											<input type="number" class="form-control">
+											<span class="input-group-btn">
+												<button class="btn btn-default" type="button">- 10%</button>
+												<button class="btn btn-primary" type="button">+ 5</button>
+											</span>
+										</div>
+									</div>
+									<div class="col-xs-5 col-weights ">
+										<p class="bg-success weights">45 + 35 + 10</p>
+									</div>
+								</div>
+							</div>
+						</form>
 					</div>
-				</form>
+				</div> -->
 			</div>
 		</div>
 	</div>
 
-	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.4/angular.min.js"></script>
+	<script src="global.js"></script>
 </body>
 </html>
