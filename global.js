@@ -19,7 +19,8 @@ myApp.factory("Workout", function($rootScope) {
 			},
 			{
 				name: "Curl",
-				amount: 80
+				amount: 80,
+				bar: 20
 			},
 			{
 				name: "Bench Press",
@@ -63,9 +64,10 @@ function WorkoutCtrl(Workout) {
 		workoutCtrl.change();
 	};
 
-	workoutCtrl.calculatePlates = function(amount) {
-		var plates = [];
-		amount = amount / 2; // how much weight do we put on one side
+	workoutCtrl.calculatePlates = function(exercise) {
+		var plates = [],
+				bar = exercise.bar === undefined ? 45 : exercise.bar,
+				amount = (exercise.amount - bar) / 2; // how much weight do we put on one side
 
 		plateDenominations.forEach(function(denomination) {
 			while (amount >= denomination) {
@@ -78,8 +80,6 @@ function WorkoutCtrl(Workout) {
 	};
 
 	workoutCtrl.change = function() {
-		// console.log("changed!");
-
 		if (typeof window.localStorage != "undefined") {
 			localStorage.setItem("workout-stats", JSON.stringify(workoutCtrl.workout.exercises));
 		}

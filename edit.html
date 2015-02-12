@@ -26,7 +26,6 @@
 				<table class="table exercises">
 					<tbody>
 						<tr ng-repeat="exercise in workoutCtrl.workout.exercises">
-							<!-- <th scope="row">{{exercise.name}}</th> -->
 							<td>
 								<div class="input-group">
 									<input type="text" ng-change="workoutCtrl.change()" class="form-control" ng-model="exercise.name">
@@ -34,6 +33,15 @@
 										<button class="btn btn-danger" type="button" ng-click="workoutCtrl.remove(exercise)">Remove</button>
 									</span>
 								</div>
+								<div class="form-inline">
+									<div class="form-group">
+										<div class="input-group">
+											<div class="input-group-addon">Bar weight:</div>
+											<input type="text" class="form-control" ng-model="exercise.bar" placeholder="45 by default">
+											<div class="input-group-addon">lbs</div>
+										</div>
+									</div>
+								</form>
 						</tr>
 					</tbody>
 				</table>
