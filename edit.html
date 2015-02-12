@@ -19,6 +19,7 @@
 </head>
 <body>
 	<div class="container">
+		<a class="btn btn-default topRight" href="/index.html">Home</a>
 		<h3>Workout Stats - Edit</h3>
 
 		<div ng-app="myApp">
@@ -27,6 +28,7 @@
 					<tbody>
 						<tr ng-repeat="exercise in workoutCtrl.workout.exercises">
 							<td>
+								<h5>Exercise {{$index + 1}}</h5>
 								<div class="input-group">
 									<input type="text" ng-change="workoutCtrl.change()" class="form-control" ng-model="exercise.name">
 									<span class="input-group-btn">
