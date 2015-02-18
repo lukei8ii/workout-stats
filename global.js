@@ -69,12 +69,16 @@ function WorkoutCtrl(Workout) {
 				bar = exercise.bar === undefined ? 45 : exercise.bar,
 				amount = (exercise.amount - bar) / 2; // how much weight do we put on one side
 
-		plateDenominations.forEach(function(denomination) {
-			while (amount >= denomination) {
-				plates.push(denomination);
-				amount -= denomination;
-			}
-		});
+		if (bar > 0) {
+			plateDenominations.forEach(function(denomination) {
+				while (amount >= denomination) {
+					plates.push(denomination);
+					amount -= denomination;
+				}
+			});
+		} else {
+			plates.push(amount);
+		}
 
 		return plates.join(" + ");
 	};
